@@ -823,7 +823,7 @@ def riskscoreci(x1,n1,x2,n2,conf_level=0.95):
 
     z =  abs(stats.norm.ppf((1-conf_level)/2))
     if x2==0 and x1 == 0:
-        ul = inf
+        ul = np.inf
         ll = 0
     else:
         a1 =  n2*(n2*(n2+n1)*x1+n1*(n2+x1)*(z**2))
@@ -848,7 +848,7 @@ def riskscoreci(x1,n1,x2,n2,conf_level=0.95):
 
         if x2 == 0 and x1 != 0:
             ll = (1-(n1-x1)*(1-p0low)/(x2+n1-(n2+n1)*p0low))/p0low
-            ul = inf
+            ul = np.inf
         elif x2 != n2 and x1==0:
             ul = (1-(n1-x1)*(1-p0up)/(x2+n1-(n2+n1)*p0up))/p0up
             ll = 0
