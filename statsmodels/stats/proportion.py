@@ -60,7 +60,7 @@ def proportion_confint(count, nobs, alpha=0.05, method='normal'):
 
     Brown, Lawrence D.; Cai, T. Tony; DasGupta, Anirban (2001). "Interval
         Estimation for a Binomial Proportion",
-        Statistical Science 16 (2): 101–133. doi:10.1214/ss/1009213286.
+        Statistical Science 16 (2): 101-133. doi:10.1214/ss/1009213286.
         TODO: Is this the correct one ?
 
     '''
@@ -787,7 +787,6 @@ def proportions_chisquare_pairscontrol(count, nobs, value=None,
                for pair in all_pairs]
     return AllPairsResults(pvals, all_pairs, multitest_method=multitest_method)
 
-
 def riskscoreci(x1,n1,x2,n2,conf_level=0.95):
     """Compute CI for the ratio of two binomial rates.
     
@@ -795,16 +794,16 @@ def riskscoreci(x1,n1,x2,n2,conf_level=0.95):
     https://github.com/shearer/PropCIs
 
     Nam, J. M. (1995) Confidence limits for the ratio of two binomial proportions based on likelihood
-    scores: Non-iterative method. Biom. J. 37 (3), 375–379.
+    scores: Non-iterative method. Biom. J. 37 (3), 375-379.
     
     Koopman PAR. (1985) Confidence limits for the ratio of two binomial proportions. Biometrics 40,
-    513–517.
+    513-517.
     
     Miettinen OS, Nurminen M. (1985) Comparative analysis of two rates. Statistics in Medicine 4,
-    213–226.
+    213-226.
     
     Nurminen, M. (1986) Analysis of trends in proportions with an ordinally scaled determinant. Biometrical
-    J 28, 965–974
+    J 28, 965-974
     
     Agresti, A. (2002) Categorical Data Analysis. Wiley, 2nd Edition.
 
@@ -836,9 +835,9 @@ def riskscoreci(x1,n1,x2,n2,conf_level=0.95):
         b3 = a4/a1
         c1 = b2-(b1**2)/3
         c2 = b3-b1*b2/3+2*(b1**3)/27
-        ceta = np.arccos(sqrt(27)*c2/(2*c1*np.sqrt(-c1)))
-        t1 = -2*np.sqrt(-c1/3)*np.cos(pi/3-ceta/3)
-        t2 = -2*np.sqrt(-c1/3)*np.cos(pi/3+ceta/3)
+        ceta = np.arccos(np.sqrt(27)*c2/(2*c1*np.sqrt(-c1)))
+        t1 = -2*np.sqrt(-c1/3)*np.cos(np.pi/3-ceta/3)
+        t2 = -2*np.sqrt(-c1/3)*np.cos(np.pi/3+ceta/3)
         t3 = 2*np.sqrt(-c1/3)*np.cos(ceta/3)
         p01 = t1-b1/3
         p02 = t2-b1/3
@@ -869,11 +868,11 @@ def riskscoreci(x1,n1,x2,n2,conf_level=0.95):
                     a = (n2+n1)*phil
                     b = -((x2+n1)*phil+x1+n2)
                     c = x2+x1
-                    p1hat = (-b-sqrt(b**2-4*a*c))/(2*a)
+                    p1hat = (-b-np.sqrt(b**2-4*a*c))/(2*a)
                     p2hat = p1hat*phil
                     q2hat = 1-p2hat
                     var = (n2*n1*p2hat)/(n1*(phil-p2hat)+n2*q2hat)
-                    chi2 = ((x1-n1*p2hat)/q2hat)/sqrt(var)
+                    chi2 = ((x1-n1*p2hat)/q2hat)/np.sqrt(var)
                     ll = phil
                     phil = ll/1.0001
             i = x2
@@ -900,11 +899,11 @@ def riskscoreci(x1,n1,x2,n2,conf_level=0.95):
                 a = (ni+nj)*phiu
                 b = -((i+nj)*phiu+j+ni)
                 c = i+j
-                p1hat = (-b-sqrt(b**2-4*a*c))/(2*a)
+                p1hat = (-b-np.sqrt(b**2-4*a*c))/(2*a)
                 p2hat = p1hat*phiu
                 q2hat = 1-p2hat
                 var = (ni*nj*p2hat)/(nj*(phiu-p2hat)+ni*q2hat)
-                chi1  = ((j-nj*p2hat)/q2hat)/sqrt(var)
+                chi1  = ((j-nj*p2hat)/q2hat)/np.sqrt(var)
                 phiu1 = phiu
                 phiu = 1.0001*phiu1
 
@@ -916,8 +915,7 @@ def riskscoreci(x1,n1,x2,n2,conf_level=0.95):
         else:
             ul = (1-(n1-x1)*(1-p0up)/(x2+n1-(n2+n1)*p0up))/p0up
             ll = (1-(n1-x1)*(1-p0low)/(x2+n1-(n2+n1)*p0low))/p0low
-    return array([ll, ul])
-
+    return np.array([ll, ul])
 
 def diffscoreci(x1,n1,x2,n2,conf_level):
     """Score interval for difference in proportions
@@ -927,13 +925,13 @@ def diffscoreci(x1,n1,x2,n2,conf_level):
     Agresti, A. (2002) Categorical Data Analysis. Wiley, 2nd Edition.
     
     Mee, RW. (1984) Confidence bounds for the difference between two probabilities. Biometrics 40,
-    1175–1176.
+    1175-1176.
     
     Miettinen OS, Nurminen M. (1985) Comparative analysis of two rates. Statistics in Medicine 4,
-    213–226.
+    213-226.
     
     Nurminen, M. (1986) Analysis of trends in proportions with an ordinally scaled determinant. Biometrical
-    J. 28, 965–974
+    J. 28, 965-974
 
     Parameters
     ----------
@@ -978,7 +976,7 @@ def diffscoreci(x1,n1,x2,n2,conf_level):
         if dp<0.0000001 or abs(z-score)<0.000001:
             ll = low2
             niter = 51
-    return array([ll, ul])
+    return np.array([ll, ul])
    
 
 def _z2stat(p1x,nx,p1y,ny,dif):
@@ -993,13 +991,13 @@ def _z2stat(p1x,nx,p1y,ny,dif):
         c = dif*dif + dif*(2*p1x + t +1) + p1x + t*p1y
         d = -p1x*dif*(1+dif)
         v = (b/a/3)**3 - b*c/(6*a*a) + d/a/2
-        s = sqrt( (b/a/3)**2 - c/a/3)
+        s = np.sqrt( (b/a/3)**2 - c/a/3)
         if v>0:
             u = s
         else:
             u = -s
-        w = (pi + arccos(v/u**3))/3
-        p1d = 2*u*cos(w) - b/a/3
+        w = (np.pi + np.arccos(v/u**3))/3
+        p1d = 2*u*np.cos(w) - b/a/3
         p2d = p1d - dif
         nxy = nx + ny
         var = (p1d*(1-p1d)/nx + p2d*(1-p2d)/ny) * nxy / (nxy - 1) ## added: * nxy / (nxy - 1)
