@@ -919,6 +919,9 @@ def riskscoreci(x1,n1,x2,n2,conf_level=0.95):
 
 def diffscoreci(x1,n1,x2,n2,conf_level):
     """Score interval for difference in proportions
+
+    Translated from R-package 'PropCIs':
+    https://github.com/shearer/PropCIs
     
     Method of Mee 1984 with Miettinen and Nurminen modification nxy / (nxy - 1), see Newcombe 1998
 
